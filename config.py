@@ -19,22 +19,11 @@ mysql_url = urlparse.urlparse(os.getenv('JAWSDB_MARIA_URL', ''))
 redis_url = urlparse.urlparse(os.getenv('REDISCLOUD_URL', ''))
 
 class mysql(object):
-    host = mysql_url.hostname or 'localhost'
-    port = mysql_url.port or '3306'
-    database = mysql_url.path[1:] or 'qiandao'
-    user = mysql_url.username or 'qiandao'
-    passwd = mysql_url.password or None
-
-class sqlite3(object):
-    path = './database.db'
-
-db_type = os.getenv('DB_TYPE', 'sqlite3')
-
-class redis(object):
-    host = redis_url.hostname or 'localhost'
-    port = redis_url.port or 6379
-    passwd = redis_url.password or None
-    db = int(os.getenv('REDIS_DB_INDEX', 1))
+    host = mysql_url.hostname
+    port = mysql_url.port
+    database = mysql_url.path[1:]
+    user = mysql_url.username
+    passwd = mysql_url.password
 evil = 100
 
 pbkdf2_iterations = 400
